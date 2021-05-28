@@ -1,0 +1,17 @@
+name: 'Setup Railway CLI'
+description: 'Set up Railway CLI without copying the one-liner install script and manually configure it again. And even no more manual CLI builds when testing an PR from railwayapp/cli."
+
+inputs:
+  npm-mode:
+    description: Install Railway CLI with npmjs
+    default: false
+  repo-url:
+    description: Git URL of custom Railway CLI source. Use the canocial repo to test new features before they land on Deploy Fridays.
+    default: ''
+  repo-branch:
+    description: "Git branch of custom Railway CLI source. When building from fhe official repo's source, use master branch."
+    default: ''
+
+runs:
+  using: node12
+  main: dist/index.js
