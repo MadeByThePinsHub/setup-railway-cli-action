@@ -1,5 +1,5 @@
 const core = require("@actions/core");
-const Toolkit = require("actions-toolkit");
+const { Toolkit } = require("actions-toolkit");
 const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");

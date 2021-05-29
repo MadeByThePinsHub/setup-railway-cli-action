@@ -15482,7 +15482,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186);
-const Toolkit = __nccwpck_require__(7045);
+const { Toolkit } = __nccwpck_require__(7045);
 const { spawn } = __nccwpck_require__(3129);
 const fs = __nccwpck_require__(5747);
 const path = __nccwpck_require__(5622);
