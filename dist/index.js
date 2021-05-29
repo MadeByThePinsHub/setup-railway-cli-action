@@ -15506,6 +15506,7 @@ const exec = (cmd, args = []) =>
     let stdout = "";
     app.stdout.on("data", (data) => {
       stdout = data;
+      core.debug(data);
     });
     app.on("close", (code) => {
       if (code !== 0) {
