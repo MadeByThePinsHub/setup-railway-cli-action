@@ -2127,7 +2127,7 @@ function run() {
                 if (cliRepoUrl && npmInstall == 'true') {
                     core.warning('Installation through NPM is found in config, but you want to build from source? Ommit npm-mode on your workflow file.');
                 }
-                yield exec_exec('npm', ['install', '-g', '@railwayapp/cli'], true).then(res => {
+                yield exec_exec('npm', ['install', '-g', '@railway/cli'], true).then(res => {
                     if (res.stderr != '' && !res.success) {
                         throw new Error(res.stderr);
                     }
@@ -2135,22 +2135,31 @@ function run() {
             }
             else if (cliRepoUrl && !cliRepoBranch) {
                 yield exec.exec('git', ['clone', cliRepoUrl, cliCloneDir]);
-                yield exec_exec('sh', [
-                    '-c',
-                    '"$(curl -sSL https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh)"'
-                ], false);
+                yield exec.exec('wget', [
+                    'https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh',
+                    '-O',
+                    '/tmp/railway-build'
+                ]);
+                yield exec.exec('sh', ['/tmp/railway-build']);
                 core.addPath(cliPath);
             }
             else if (cliRepoUrl && cliRepoBranch) {
                 yield exec.exec('git', ['clone', '-b', cliRepoBranch, cliRepoUrl, cliCloneDir]);
-                yield exec_exec('sh', [
-                    '-c',
-                    '"$(curl -sSL https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh)"'
-                ], false);
+                yield exec.exec('wget', [
+                    'https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh',
+                    '-O',
+                    '/tmp/railway-build'
+                ]);
+                yield exec.exec('sh', ['/tmp/railway-build']);
                 core.addPath(cliPath);
             }
             else {
-                yield exec_exec('sudo', ['sh', '-c', '"$(curl -sSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh)"'], false);
+                yield exec.exec('wget', [
+                    '-O',
+                    '/tmp/install-railway-cli',
+                    'https://raw.githubusercontent.com/railwayapp/cli/master/install.sh'
+                ]);
+                yield exec_exec('sudo', ['sh', '/tmp/install-railway-cli'], false);
             }
             core.endGroup();
             core.startGroup('Railway CLI install info');

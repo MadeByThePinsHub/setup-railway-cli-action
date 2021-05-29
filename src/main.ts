@@ -26,39 +26,36 @@ async function run(): Promise<void> {
           'Installation through NPM is found in config, but you want to build from source? Ommit npm-mode on your workflow file.'
         );
       }
-      await mexec.exec('npm', ['install', '-g', '@railwayapp/cli'], true).then(res => {
+      await mexec.exec('npm', ['install', '-g', '@railway/cli'], true).then(res => {
         if (res.stderr != '' && !res.success) {
           throw new Error(res.stderr);
         }
       });
     } else if (cliRepoUrl && !cliRepoBranch) {
       await exec.exec('git', ['clone', cliRepoUrl, cliCloneDir]);
-      await mexec.exec(
-        'sh',
-        [
-          '-c',
-          '"$(curl -sSL https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh)"'
-        ],
-        false
-      );
+      await exec.exec('wget', [
+        'https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh',
+        '-O',
+        '/tmp/railway-build'
+      ]);
+      await exec.exec('sh', ['/tmp/railway-build']);
       core.addPath(cliPath);
     } else if (cliRepoUrl && cliRepoBranch) {
       await exec.exec('git', ['clone', '-b', cliRepoBranch, cliRepoUrl, cliCloneDir]);
-      await mexec.exec(
-        'sh',
-        [
-          '-c',
-          '"$(curl -sSL https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh)"'
-        ],
-        false
-      );
+      await exec.exec('wget', [
+        'https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh',
+        '-O',
+        '/tmp/railway-build'
+      ]);
+      await exec.exec('sh', ['/tmp/railway-build']);
       core.addPath(cliPath);
     } else {
-      await mexec.exec(
-        'sudo',
-        ['sh', '-c', '"$(curl -sSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh)"'],
-        false
-      );
+      await exec.exec('wget', [
+        '-O',
+        '/tmp/install-railway-cli',
+        'https://raw.githubusercontent.com/railwayapp/cli/master/install.sh'
+      ]);
+      await mexec.exec('sudo', ['sh', '/tmp/install-railway-cli'], false);
     }
     core.endGroup();
 
