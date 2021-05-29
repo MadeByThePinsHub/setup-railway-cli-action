@@ -15502,14 +15502,14 @@ const workspace = process.env.GITHUB_WORKSPACE;
  */
 const exec = (cmd, args = []) =>
   new Promise((resolve, reject) => {
-    const app = spawn(cmd, args, { stdio: "pipe" });
+    const app = spawn(cmd, args);
     let stdout = "";
     app.stdout.on("data", (data) => {
       stdout = data;
     });
     app.on("close", (code) => {
-      if (code !== 0 && !stdout.includes("Successfully ran command.")) {
-        err = new Error(`Invalid status code: ${code}`);
+      if (code !== 0) {
+        err = new Error(`An error occured with status code: ${code}`);
         err.code = code;
         return reject(err);
       }
