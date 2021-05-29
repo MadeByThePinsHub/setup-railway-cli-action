@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PATH="$PWD/node_modules/.bin:$PATH"
+
+if [[ $1 == "check" ]]; then
+  prettier --check src/*.ts
+elif [[ $1 == "write" ]]; then
+  prettier --write src/*.ts
+elif [[ $1 == 'install' ]]; then
+  npm i prettier --save-dev
+else
+  echo "$0 <check|write>"
+  echo "Available commands:"
+fi
