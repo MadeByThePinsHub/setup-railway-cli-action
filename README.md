@@ -6,23 +6,6 @@ Setup Railway CLI for GitHub Actions, without reading the install script file fo
 
 Note that this Railway CLI stuff in GitHub Actions is under work-in-progress and only the default mode will only work on `v0.1.0` for now. Contributors are always welcome!
 
-## Legal Disclaimer
-
-> That's too long, but to summarize: Neither Andrei Jiroh or The Pins Team is not
-affliated with Railway Corp. This is just an community project we made to make
-setting up Railway CLI not only more easier, but with more customizations, like
-building from source and using NPM to install it.
-
-We're not affliated with Railway Corporation, and Andrei Jiroh isn't their
-employee nor The Pins Team is an independent business branch of Railway Corp.
-We're just their users of the service, and we're not an company by the way.
-
-As most open-source projects do, the team is currently only have one team
-member working on this project, among maintaining the team handbook and others
-(and most of the community members that are publicly mentioned on our GitHub org's
-members list are probably busy with other stuff and we don't usually bother them unless we
-call an meeting).
-
 ## Using the Action
 
 It's easy as plugging the action to your workflow files painlessly, if you only use project tokens.
