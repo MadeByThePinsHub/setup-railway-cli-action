@@ -15490,7 +15490,7 @@ const path = __nccwpck_require__(5622);
 // get config first
 const cliRepoUrl = core.getInput("repo-url");
 const cliRepoBranch = core.getInput("repo-branch");
-const installThroughNpmjs = core.getBooleanInput("npm-mode");
+const installThroughNpmjs = core.getInput("npm-mode");
 const workspace = process.env.GITHUB_WORKSPACE;
 
 /**
