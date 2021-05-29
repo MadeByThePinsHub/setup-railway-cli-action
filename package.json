@@ -2,11 +2,11 @@
   "name": "@madebythepinshub/setup-railway-cli-action",
   "version": "0.1.0",
   "description": "Set up Railway CLI in GitHub Actions",
-  "main": "src/index.ts",
+  "main": "src/main.ts",
   "scripts": {
     "test": "echo todo",
-    "prettify:check": "prettier --check index.js",
-    "prettify": "prettier --write index.js",
+    "prettify:check": "./bin/prettify check",
+    "prettify": "./bin/prettify write",
     "build": "ncc build index.js -o dist"
   },
   "repository": {
@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@actions/core": "^1.3.0",
-    "actions-toolkit": "^6.0.1"
+    "@actions/exec": "^1.0.4"
   }
 }
