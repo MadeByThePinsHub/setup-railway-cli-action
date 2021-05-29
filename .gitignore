@@ -80,7 +80,9 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# Since we don't use Nuxt.js, we need that directory
+# for this action to work
+!dist
 
 # Gatsby files
 .cache/
