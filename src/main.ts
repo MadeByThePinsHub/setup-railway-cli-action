@@ -1,6 +1,7 @@
 import * as mexec from './exec';
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
+import * as which from 'which';
 
 async function run(): Promise<void> {
   try {
@@ -62,7 +63,15 @@ async function run(): Promise<void> {
     core.endGroup();
 
     core.startGroup('Railway CLI install info');
-    core.debug('Railway CLI Path: ' + core.findPath('railway'));
+    which('railway', function (er, resolvedPath) {
+      // er is returned if no "node" is found on the PATH
+      // if it is found, then the absolute path to the exec is returned
+      if (er) {
+        core.setFailed(er);
+      } else {
+        core.debug('Railway CLI Path: ' + resolvedPath);
+      }
+    });
     await exec.exec('railway', ['version']);
   } catch (error) {
     core.setFailed(error.message);
