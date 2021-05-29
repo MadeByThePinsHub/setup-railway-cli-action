@@ -26,7 +26,7 @@ async function run(): Promise<void> {
           'Installation through NPM is found in config, but you want to build from source? Ommit npm-mode on your workflow file.'
         );
       }
-      await mexec.exec('npm', ['install', '-g', '@railway/cli'], true).then(res => {
+      await mexec.exec('sudo', ['npm', 'install', '-g', '@railway/cli'], true).then(res => {
         if (res.stderr != '' && !res.success) {
           throw new Error(res.stderr);
         }
