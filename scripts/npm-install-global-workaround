@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir $GITHUB_WORKSPACE/.npm-global
+NPM_CONFIG_PREFIX=$GITHUB_WORKSPACE/.npm-global npm install -g @railway/app

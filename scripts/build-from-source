@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CLONE_DIR=$1
+BRANCH=$3
+REPO=$2
+
+# Clone repo first
+if [[ $BRANCH == "" ]]; then
+  git clone $REPO $CLONE_DIR
+else
+  git clone -b $BRANCH $REPO $CLONE_DIR
+fi
+
+# Install deps
+cd $CLONE_DIR
+go get -v -t -d ./...
+
+# The build and move to /usr/bin/local
+make build
+sudo mv $CLONE_DIR/bin/railway /usr/bin/local/railway
