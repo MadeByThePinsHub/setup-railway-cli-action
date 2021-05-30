@@ -2117,41 +2117,35 @@ function run() {
             core.endGroup();
             // for installs through NPM
             const npmInstall = core.getInput('npm-mode');
+            const npmPrefix = process.env.GITHUB_WORKSPACE + '/.npm-global';
             // and for installs through the reproduicible build process
             const cliRepoUrl = core.getInput('repo-url');
             const cliRepoBranch = core.getInput('repo-url');
-            const cliCloneDir = process.env.GITHUB_HOME + '/.railwayappcli';
-            const cliPath = cliCloneDir + '/bin';
+            const cliClonePath = process.env.GITHUB_WORKSPACE + '/.railwayappcli';
+            // const cliPath = cliCloneDir + '/bin';
+            // Rawfiles to our scripts
+            const npmGlobalInstallWorkaround = 'https://raw.githubusercontent.com/MadeByThePinsHub/setup-railway-cli-action/main/scripts/npm-install-global-workaround';
+            const buildFromSourceScript = 'https://raw.githubusercontent.com/MadeByThePinsHub/setup-railway-cli-action/main/scripts/build-from-source';
             core.startGroup('Installing Railway CLI');
             if (npmInstall == 'true') {
                 if (cliRepoUrl && npmInstall == 'true') {
                     core.warning('Installation through NPM is found in config, but you want to build from source? Ommit npm-mode on your workflow file.');
                 }
-                yield exec_exec('sudo', ['npm', 'install', '-g', '@railway/cli'], true).then(res => {
+                yield exec.exec('wget', [npmGlobalInstallWorkaround, '-O', '/tmp/npm-install-global-workaround']);
+                yield exec_exec('bash', ['/tmp/npm-install-global-workaround'], false).then(res => {
                     if (res.stderr != '' && !res.success) {
                         throw new Error(res.stderr);
                     }
                 });
+                core.addPath(npmPrefix);
             }
-            else if (cliRepoUrl && !cliRepoBranch) {
-                yield exec.exec('git', ['clone', cliRepoUrl, cliCloneDir]);
-                yield exec.exec('wget', [
-                    'https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh',
-                    '-O',
-                    '/tmp/railway-build'
-                ]);
-                yield exec.exec('sh', ['/tmp/railway-build']);
-                core.addPath(cliPath);
+            else if (cliRepoUrl && cliRepoBranch == '') {
+                yield exec.exec('wget', [buildFromSourceScript, '-O', '/tmp/railway-build']);
+                yield exec_exec('sh', ['/tmp/railway-build', cliClonePath, cliRepoUrl], false);
             }
-            else if (cliRepoUrl && cliRepoBranch) {
-                yield exec.exec('git', ['clone', '-b', cliRepoBranch, cliRepoUrl, cliCloneDir]);
-                yield exec.exec('wget', [
-                    'https://gist.githubusercontent.com/AndreiJirohHaliliDev2006/54fb09207e1a1589a4caafb8510a25d7/raw/bb884dfe1463c87940b0afa8b228cec3f321b329/railwayapp-cli-build.sh',
-                    '-O',
-                    '/tmp/railway-build'
-                ]);
-                yield exec.exec('sh', ['/tmp/railway-build']);
-                core.addPath(cliPath);
+            else if (cliRepoUrl && cliRepoBranch != '') {
+                yield exec.exec('wget', [buildFromSourceScript, '-O', '/tmp/railway-build']);
+                yield exec_exec('sh', ['/tmp/railway-build', cliClonePath, cliRepoUrl, cliRepoBranch], false);
             }
             else {
                 yield exec.exec('wget', [
