@@ -7,7 +7,7 @@
         "dom"
       ],
       "newLine": "lf",
-      "outDir": "./lib",
+      "outDir": "./dist",
       "rootDir": "./src",
       "strict": true,
       "noImplicitAny": false,
