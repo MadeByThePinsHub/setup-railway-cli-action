@@ -1,5 +1,5 @@
 #!/bin/bash
 
 mkdir $GITHUB_WORKSPACE/.npm-global
-NPM_CONFIG_PREFIX=$GITHUB_WORKSPACE/.npm-global npm install -g @railway/app
+NPM_CONFIG_PREFIX=$GITHUB_WORKSPACE/.npm-global npm install -g @railway/cli
 sudo ln -s /usr/lib/node_modules/bin/railway $GITHUB_WORKSPACE/.npm-global/bin/railway
