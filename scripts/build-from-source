@@ -6,13 +6,13 @@ REPO=$2
 
 # Clone repo first
 if [[ $BRANCH == "" ]]; then
-  git clone $REPO $CLONE_DIR
+  git clone "$REPO" "$CLONE_DIR"
 else
-  git clone -b $BRANCH $REPO $CLONE_DIR
+  git clone -b "$BRANCH" "$REPO" "$CLONE_DIR"
 fi
 
 # Install deps
-cd $CLONE_DIR
+cd "$CLONE_DIR" || echo "Clone directory not found" && exit 2
 go get -v -t -d ./...
 
 # The build and move to /usr/bin/local

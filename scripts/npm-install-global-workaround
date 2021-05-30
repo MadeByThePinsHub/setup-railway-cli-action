@@ -1,5 +1,10 @@
 #!/bin/bash
 
-mkdir $GITHUB_WORKSPACE/.npm-global
+# create an user-wide globa install for the current workspace
+mkdir "$GITHUB_WORKSPACE"/.npm-global
+
+# then install @railway/cli into it
 NPM_CONFIG_PREFIX=$GITHUB_WORKSPACE/.npm-global npm install -g @railway/cli
-sudo ln -s $GITHUB_WORKSPACE/.npm-global/bin/railway /usr/lib/node_modules/bin/railway
+
+# then symlink /usr/local/bin/railway to our Railway binary over WORKSAPCE/.npm-global/bin
+sudo ln -s "$GITHUB_WORKSPACE"/.npm-global/bin/railway /usr/local/bin/railway
