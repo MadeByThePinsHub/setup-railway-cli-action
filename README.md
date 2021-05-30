@@ -1,24 +1,67 @@
 # Setup Railway CLI in GitHub Actions
 
-[![https://img.shields.io/liberapay/receives/ThePinsTeam.svg?logo=liberapay]](https://liberapay.com/thepinsteam/donate)
+[![](https://img.shields.io/liberapay/receives/ThePinsTeam.svg?logo=liberapay)](https://liberapay.com/thepinsteam/donate)
+[![Test Railway CLI install](https://github.com/AndreiJirohHaliliDev2006/solid-carnival/actions/workflows/railway-cli-test.yml/badge.svg)](https://github.com/AndreiJirohHaliliDev2006/solid-carnival/actions/workflows/railway-cli-test.yml)
 
-Setup Railway CLI for GitHub Actions, without reading the install script file for configuring installs.
+Setup Railway CLI for GitHub Actions, without reading the install script file for
+configuring installs.
 
-Note that this Railway CLI stuff in GitHub Actions is under work-in-progress and only the default mode will only work on `v0.1.0` for now. Contributors are always welcome!
+Note that this Railway CLI stuff in GitHub Actions is under work-in-progress and only
+Linux runners will be fully supported  on `v0.1.0` for now. While macOS has bash, we can't
+full promise about if it's works, but we'll working on it. Windows runner support will
+be the on the bottom of the backlog due to User Account Control workarounds and even possiblt
+not supporting the . Contributors are always welcome!
 
 ## Using the Action
 
-It's easy as plugging the action to your workflow files painlessly, if you only use project tokens.
+It's easy as plugging the action to your workflow files painlessly, if you only use
+project tokens.
 
 ```yml
 # Since this is shiny new project, proceed at your own risk!
 # Also we need contributors for make these config below in the
 # README to work.
 - name: Setup Railway CLI
-  uses: MadeByThePinsHub/setup-railway-cli-action@main
+  uses: MadeByThePinsHub/setup-railway-cli-action@v0.1.0
 ```
 
 The default will install the latest version of the CLI using the install script.
+
+If you need to generate your API token, copy the following into your private repo's
+`.gothub/workflows/generate-railway-api-token.yml`:
+
+```yml
+name: JWT Generator for Railway CLI
+
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: Email address of your Railway account
+        required: true
+
+jobs:
+  authenicate-to-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Install the CLI first
+      - uses: MadeByThePinsHub/setup-railway-cli-action@v0.1.0
+
+      # then we'll log in in browserless mode
+      # remember to keep yourself on the action logs for the link
+      # click on it, confirm that the passpharse matches and hit that purple button
+      - name: Authenicate the CLI
+        run: railway login --browserless
+
+      # Then we'll get the token for you.
+      - name: Get token
+        run: echo Your token is $(cat ~/.railway/config.json | jq .user.token), keep this secret.
+      # We might implement an better way for this one.
+```
+
+More examples are in the [`examples`](/examples) directory, including deploying to Railway.
 
 ## Config / Customizations
 
@@ -27,7 +70,7 @@ The default will install the latest version of the CLI using the install script.
 
 ```yml
 - name: Setup Railway CLI (base on railwayapp/cli#126)
-  uses: MadeByThePinsHub/setup-railway-cli-action@main
+  uses: MadeByThePinsHub/setup-railway-cli-action@v0.1.0
   with:
     # This will install Go dependencies first before doing 'make build'
     repo-url: https://github.com/railwayapp/cli
@@ -42,9 +85,10 @@ User Account Control trick for Windows.)
 
 ```yml
 # We don't check where the executable path Node.js and NPM is
-# because we need to support both Linux/macOS and Windows users
+# because we need to support both Linux and macOS runners.
+# Windows might be abit tircky because of UAC.
 - name: Install Railway with NPM
-  uses: MadeByThePinsHub/setup-railway-cli-action@main
+  uses: MadeByThePinsHub/setup-railway-cli-action@v0.1.0
   with:
     npm-mode: true
 ```
