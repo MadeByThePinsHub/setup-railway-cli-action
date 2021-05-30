@@ -16,7 +16,7 @@ async function run(): Promise<void> {
 
     // and for installs through the reproduicible build process
     const cliRepoUrl = core.getInput("repo-url");
-    const cliRepoBranch = core.getInput("repo-url");
+    const cliRepoBranch = core.getInput("repo-branch");
     const cliClonePath = process.env.GITHUB_WORKSPACE + "/.railwayappcli";
     // const cliPath = cliCloneDir + '/bin';
 
