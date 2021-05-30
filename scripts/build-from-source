@@ -17,4 +17,7 @@ go get -v -t -d ./...
 
 # The build and move to /usr/bin/local
 make build
-sudo mv $CLONE_DIR/bin/railway /usr/bin/local/railway
+sudo mv $CLONE_DIR/bin/railway /usr/local/bin/railway
+
+# ensure it's executable
+sudo chmod +x /usr/local/bin/railway
