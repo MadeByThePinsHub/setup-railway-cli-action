@@ -5,10 +5,10 @@ BRANCH=$3
 REPO=$2
 
 # Clone repo first
-if [[ $BRANCH == "" ]]; then
-  git clone "$REPO" "$CLONE_DIR"
-else
+if [[ $BRANCH != "" ]]; then
   git clone -b "$BRANCH" "$REPO" "$CLONE_DIR"
+else
+  git clone "$REPO" "$CLONE_DIR"
 fi
 
 # Install deps
