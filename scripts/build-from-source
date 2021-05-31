@@ -13,11 +13,12 @@ fi
 
 # Install deps
 cd "$CLONE_DIR" || echo "Clone directory not found" && exit 2
-go get -v -t -d ./...
+go get --verbose -t -d ./...
 
 # The build and move to /usr/bin/local
-make build
-sudo mv $CLONE_DIR/bin/railway /usr/local/bin/railway
+VERBOSE=1 go build -o bin/railway
+# Temporarily move to /usr/bin
+sudo mv $CLONE_DIR/bin/railway /usr/bin/railway
 
 # ensure it's executable
-sudo chmod +x /usr/local/bin/railway
+sudo chmod +x /usr/bin/railway
