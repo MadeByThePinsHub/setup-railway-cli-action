@@ -2121,8 +2121,8 @@ function run() {
             // and for installs through the reproduicible build process
             const cliRepoUrl = core.getInput("repo-url");
             const cliRepoBranch = core.getInput("repo-branch");
-            const cliClonePath = process.env.GITHUB_WORKSPACE + "/.railwayappcli";
-            // const cliPath = cliCloneDir + '/bin';
+            const cliClonePath = "/tmp/railwayappcli";
+            const cliPath = cliClonePath + '/bin';
             // Rawfiles to our scripts
             const npmGlobalInstallWorkaround = "https://raw.githubusercontent.com/MadeByThePinsHub/setup-railway-cli-action/main/scripts/npm-install-global-workaround";
             const buildFromSourceScript = "https://raw.githubusercontent.com/MadeByThePinsHub/setup-railway-cli-action/main/scripts/build-from-source";
@@ -2151,6 +2151,7 @@ function run() {
                     "/tmp/railway-build"
                 ]);
                 yield exec_exec("bash", ["/tmp/railway-build", cliClonePath, cliRepoUrl], false);
+                core.addPath(cliPath);
             }
             else if (cliRepoUrl && cliRepoBranch != "") {
                 yield exec.exec("wget", [
@@ -2159,6 +2160,7 @@ function run() {
                     "/tmp/railway-build"
                 ]);
                 yield exec_exec("bash", ["/tmp/railway-build", cliClonePath, cliRepoUrl, cliRepoBranch], false);
+                core.addPath(cliPath);
             }
             else {
                 yield exec.exec("wget", [

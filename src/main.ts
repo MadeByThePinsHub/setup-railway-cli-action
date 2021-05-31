@@ -17,8 +17,8 @@ async function run(): Promise<void> {
     // and for installs through the reproduicible build process
     const cliRepoUrl = core.getInput("repo-url");
     const cliRepoBranch = core.getInput("repo-branch");
-    const cliClonePath = process.env.GITHUB_WORKSPACE + "/.railwayappcli";
-    // const cliPath = cliCloneDir + '/bin';
+    const cliClonePath = "/tmp/railwayappcli";
+    const cliPath = cliClonePath + '/bin';
 
     // Rawfiles to our scripts
     const npmGlobalInstallWorkaround =
@@ -57,6 +57,7 @@ async function run(): Promise<void> {
         ["/tmp/railway-build", cliClonePath, cliRepoUrl],
         false
       );
+      core.addPath(cliPath);
     } else if (cliRepoUrl && cliRepoBranch != "") {
       await exec.exec("wget", [
         buildFromSourceScript,
@@ -68,6 +69,7 @@ async function run(): Promise<void> {
         ["/tmp/railway-build", cliClonePath, cliRepoUrl, cliRepoBranch],
         false
       );
+      core.addPath(cliPath);
     } else {
       await exec.exec("wget", [
         "-O",
