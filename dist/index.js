@@ -2112,7 +2112,7 @@ function run() {
     return main_awaiter(this, void 0, void 0, function* () {
         try {
             core.startGroup(`Node.js and npmjs version`);
-            yield exec.exec("node", ["-v"]);
+            yield exec.exec("wget", ["--version"]);
             yield exec.exec("npm", ["version"]);
             core.endGroup();
             // for installs through NPM
@@ -2150,7 +2150,7 @@ function run() {
                     "-O",
                     "/tmp/railway-build"
                 ]);
-                yield exec_exec("sh", ["/tmp/railway-build", cliClonePath, cliRepoUrl], false);
+                yield exec_exec("bash", ["/tmp/railway-build", cliClonePath, cliRepoUrl], false);
             }
             else if (cliRepoUrl && cliRepoBranch != "") {
                 yield exec.exec("wget", [
@@ -2158,7 +2158,7 @@ function run() {
                     "-O",
                     "/tmp/railway-build"
                 ]);
-                yield exec_exec("sh", ["/tmp/railway-build", cliClonePath, cliRepoUrl, cliRepoBranch], false);
+                yield exec_exec("bash", ["/tmp/railway-build", cliClonePath, cliRepoUrl, cliRepoBranch], false);
             }
             else {
                 yield exec.exec("wget", [

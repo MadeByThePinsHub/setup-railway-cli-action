@@ -6,7 +6,7 @@ import * as which from "which";
 async function run(): Promise<void> {
   try {
     core.startGroup(`Node.js and npmjs version`);
-    await exec.exec("node", ["-v"]);
+    await exec.exec("wget", ["--version"]);
     await exec.exec("npm", ["version"]);
     core.endGroup();
 
@@ -53,7 +53,7 @@ async function run(): Promise<void> {
         "/tmp/railway-build"
       ]);
       await mexec.exec(
-        "sh",
+        "bash",
         ["/tmp/railway-build", cliClonePath, cliRepoUrl],
         false
       );
@@ -64,7 +64,7 @@ async function run(): Promise<void> {
         "/tmp/railway-build"
       ]);
       await mexec.exec(
-        "sh",
+        "bash",
         ["/tmp/railway-build", cliClonePath, cliRepoUrl, cliRepoBranch],
         false
       );
