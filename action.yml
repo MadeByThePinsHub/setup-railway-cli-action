@@ -1,7 +1,8 @@
 name: 'Setup Railway CLI'
 description: 'Set up Railway CLI for usage in GitHub Actions'
-icon: arrow-down
-color: purple
+branding:
+  icon: arrow-down
+  color: purple
 
 inputs:
   npm-mode:
