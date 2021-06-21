@@ -100,23 +100,22 @@ User Account Control trick for Windows.)
 See [`BACKLOGS.md`](BACKLOGS.md) for list of currently backlogged features
 to implement.
 
+## Contributing Docs
+
+See [CONTRIBUTING.md](/COTRIBUTING.md) file for details on how to contribute.
+
 ## Related Actions for Railway CLI
 
-* [Deploy to Railway](https://github.com/MadeByThePinsHub/railway-up-action) - **CURRENTLY WORKING ON**
+* [Deploy to Railway](https://github.com/MadeByThePinsHub/railway-up-action) - **COMMING SOON**
 * [Sign in to Railway](https://github.com/MadeByThePinsHub/railway-login-action) - **COMING SOON**
 
 ## Support the Development
 
-If you love this project, consider supporting The Pins Team on these
-platforms to keep Andrei Jiroh motivated to keep maintaining projects:
+If you love this project, consider supporting The Pins Team on these platforms to keep Andrei Jiroh motivated to keep maintaining projects:
 
 * [Patreon](https://patreon.com/thepinsteam) - If you use Patreon to support your favorite creators, use this path.
 * [Liberapay](https://liberapay.com/thepinsteam) - You're in control on how much and when you fund your donation to us
 In Liberapay, donations through our team page will divide equally and go straight to team members.
-
-### Contributing Docs
-
-See [CONTRIBUTING.md](/COTRIBUTING.md) file for details.
 
 We also accept one-time donations in [cryptocurrency](https://donate.madebythepins.tk/crypto)
 and in [PayPal](https://donate.madebythepins.tk/paypal).
