@@ -65,10 +65,11 @@ More examples are in the [`examples`](/examples) directory, including deploying 
 
 ## Config / Customizations
 
-* `repo-url` - URL of custom Railway CLI repo (we'll build the CLI manually)
-  * `repo-branch` - Requires `repo-url` if filled out, Git branch for reproducible builds (used on cloning an specific branch).
+* `repo-url` - URL of custom Railway CLI repo (we'll build the CLI manually), requires Golang to be in PATH.
+* `repo-branch` - Requires `repo-url` if filled out, Git branch for reproducible builds (used on cloning an specific branch), requires Golang to be in PATH.
 
 ```yml
+# This feature is currently broken and will fix soon.
 - name: Setup Railway CLI (base on railwayapp/cli#126)
   uses: MadeByThePinsHub/setup-railway-cli-action@v0.1.0
   with:
@@ -86,7 +87,8 @@ User Account Control trick for Windows.)
 ```yml
 # We don't check where the executable path Node.js and NPM is
 # because we need to support both Linux and macOS runners.
-# Windows might be abit tircky because of UAC.
+# Windows might be abit tircky because of UAC. We'll fix that
+# soon, including some win32 handling stuff.
 - name: Install Railway with NPM
   uses: MadeByThePinsHub/setup-railway-cli-action@v0.1.0
   with:
@@ -111,6 +113,10 @@ platforms to keep Andrei Jiroh motivated to keep maintaining projects:
 * [Patreon](https://patreon.com/thepinsteam) - If you use Patreon to support your favorite creators, use this path.
 * [Liberapay](https://liberapay.com/thepinsteam) - You're in control on how much and when you fund your donation to us
 In Liberapay, donations through our team page will divide equally and go straight to team members.
+
+### Contributing Docs
+
+See [CONTRIBUTING.md](/COTRIBUTING.md) file for details.
 
 We also accept one-time donations in [cryptocurrency](https://donate.madebythepins.tk/crypto)
 and in [PayPal](https://donate.madebythepins.tk/paypal).
