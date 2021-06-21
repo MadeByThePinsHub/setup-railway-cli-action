@@ -1,7 +1,7 @@
 # Setup Railway CLI in GitHub Actions
 
-[![](https://img.shields.io/liberapay/receives/ThePinsTeam.svg?logo=liberapay)](https://liberapay.com/thepinsteam/donate)
-[![Test Railway CLI install](https://github.com/AndreiJirohHaliliDev2006/solid-carnival/actions/workflows/railway-cli-test.yml/badge.svg)](https://github.com/AndreiJirohHaliliDev2006/solid-carnival/actions/workflows/railway-cli-test.yml)
+[![Liberapay](https://img.shields.io/liberapay/receives/ThePinsTeam.svg?logo=liberapay?style=flat-square)](https://liberapay.com/thepinsteam/donate)
+[![GitHub issues](https://img.shields.io/github/issues/MadeByThePinsHub/setup-railway-cli-action?style=flat-square)](https://github.com/MadeByThePinsHub/setup-railway-cli-action/issues)
 
 Setup Railway CLI for GitHub Actions, without reading the install script file for
 configuring installs.
@@ -94,6 +94,13 @@ User Account Control trick for Windows.)
   with:
     npm-mode: true
 ```
+
+## CI Stuff
+
+| CI Name | Type | Badge |
+| --- | --- | --- |
+| Manual Real-life usage (push) | GitHub Actions | [![Test Railway CLI install](https://github.com/AndreiJirohHaliliDev2006/solid-carnival/actions/workflows/railway-cli-test.yml/badge.svg?event=push)](https://github.com/AndreiJirohHaliliDev2006/solid-carnival/actions/workflows/railway-cli-test.yml) |
+| Unit Testing | Jest | TODO |
 
 ## Backlog
 
