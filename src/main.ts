@@ -18,7 +18,7 @@ async function run(): Promise<void> {
     const cliRepoUrl = core.getInput("repo-url");
     const cliRepoBranch = core.getInput("repo-branch");
     const cliClonePath = "/tmp/railwayappcli";
-    const cliPath = cliClonePath + '/bin';
+    const cliPath = cliClonePath + "/bin";
 
     // Rawfiles to our scripts
     const npmGlobalInstallWorkaround =
@@ -47,6 +47,9 @@ async function run(): Promise<void> {
         });
       core.addPath(npmPrefix);
     } else if (cliRepoUrl && cliRepoBranch == "") {
+      core.warning(
+        "This feature is currently broken, will probably fix soon but contributions are welcome!"
+      );
       await exec.exec("wget", [
         buildFromSourceScript,
         "-O",
