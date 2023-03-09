@@ -1,6 +1,6 @@
 {
   "name": "@madebythepinshub/setup-railway-cli-action",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Set up Railway CLI in GitHub Actions",
   "main": "src/main.ts",
   "scripts": {

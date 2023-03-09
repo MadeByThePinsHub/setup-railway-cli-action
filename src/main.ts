@@ -93,7 +93,7 @@ async function run(): Promise<void> {
         core.debug("Railway CLI Path: " + resolvedPath);
       }
     });
-    await exec.exec("railway", ["version"]);
+    await exec.exec("railway", ["--version"]);
   } catch (error) {
     core.setFailed(error.message);
   }

@@ -2183,7 +2183,7 @@ function run() {
                     core.debug("Railway CLI Path: " + resolvedPath);
                 }
             });
-            yield exec.exec("railway", ["version"]);
+            yield exec.exec("railway", ["--version"]);
         }
         catch (error) {
             core.setFailed(error.message);
